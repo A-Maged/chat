@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="/css/styles.bundle.css">
+</head>
+<body>
+
+	<%- include partials/nav.ejs %>
+	
+
+	<div>
+		<p>input you nickname</p>
+		<input type="text" id="name" placeholder="name">
+		<button id="setNick">register</button>
+	</div>
+
+	<div id="chat">
+		<ul id="onlineusers"></ul>
+		<br>
+		<textarea id="msg" placeholder="msg"></textarea>
+		<br>
+		<button id="send">send</button>
+		<br>
+		<ul id="allmsgs"></ul>	
+	</div>
+	
+
+
+
+
+
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	 <script src="/socket.io/socket.io.js"></script>
+	 <script type="text/javascript" src="/js/bundle.js"></script>
+</body>
+</html>
