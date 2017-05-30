@@ -102,8 +102,9 @@ __webpack_require__(0);
 
 		socket.emit('new user', nickName, function (isValid) {
 			if (isValid) {
-				// security is shitty here, because the user can show the chat himself
+				$('#onlineusers').append($('<li>').text(nickName));
 				$('#chat').show();
+				$('#initialConnection').hide();
 				socketUpdates(socket, nickName);
 			}
 		});
@@ -125,14 +126,15 @@ __webpack_require__(0);
 
 		// update msgs list
 		socket.on('update msgs', function (data) {
-			$('#allmsgs').append($('<li>').text('name: ' + data.name + ' - ' + 'msg: ' + data.msg));
+			$('#allmsgs').append($('<li>').text(data.name + ':  ' + data.msg));
 		});
 
 		// send new msg
 		$('#send').on('click', function () {
-			var msg = $('#msg').val();
-			if (msg) {
-				socket.emit('new msg', { name: nickName, msg: msg });
+			var $msg = $('#msg');
+			if ($msg.val()) {
+				socket.emit('new msg', { name: nickName, msg: $msg.val() });
+				$msg.val('');
 			}
 		});
 	}

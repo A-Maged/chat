@@ -10,7 +10,7 @@
 	<%- include partials/nav.ejs %>
 	
 
-	<div>
+	<div id="initialConnection">
 		<p>input you nickname</p>
 		<input type="text" id="name" placeholder="name">
 		<button id="setNick">register</button>
@@ -19,7 +19,7 @@
 	<div id="chat">
 		<ul id="onlineusers"></ul>
 		<br>
-		<textarea id="msg" placeholder="msg"></textarea>
+		<textarea id="msg" "></textarea>
 		<br>
 		<button id="send">send</button>
 		<br>

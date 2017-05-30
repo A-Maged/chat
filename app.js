@@ -13,7 +13,7 @@ var io = require('socket.io')(server);
 
 
 // 1- configure app
-var port = 3000;
+var port =  process.env.PORT || 3000 ;
 dotenv.config()
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
