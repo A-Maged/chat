@@ -29,12 +29,13 @@
 		// handle online users updates
 		socket.on('update online user' , function(users) {
 			// empty online users list
-			$('#onlineusers > li').remove()
+			// $('#onlineusers > li').remove()
 
+   			console.log(users)
 			// add online users 
-			for (var i = users.length - 1; i >= 0; i--) {
-		   			$('#onlineusers').append($('<li>').text(users[i]));
-			}
+			// for (var i = users.length - 1; i >= 0; i--) {
+		   			// $('#onlineusers').append($('<li>').text(users[i]));
+			// }
 		})
 
 

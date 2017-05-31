@@ -50,70 +50,49 @@ var users = []
 var ips = []
 
 io.on('connection', function (socket) {
-	checkIp(socket)
-
-	socket.on('new user', function(nickName, callback) {
-		checkUser(socket, nickName, callback)
-	})
-
-
-
-	// wait for a new msg
-	socket.on('new msg', function(data) {
-		// send new msgs to every one
-		io.emit('update msgs', data);
-	})
-
-
-	// handle disconnects
-	socket.on('disconnect', function(){
-		// get user index in the array 
-		var disconnectedUserIndex = users.indexOf(socket.nickName)		
-		var disconnectedIpIndex = ips.indexOf( socket.handshake.address )		
-		
-		// remove user from the array
-		users.splice(disconnectedUserIndex , 1)
-		ips.splice(disconnectedIpIndex , 1)
-
-		console.log('disconnected user')
-
-		// send the new users list to every online
-		io.emit('update online user', users);
-	});
-});
-
-
-
-
-// makes sure that the user only connects once
-function checkIp(socket) {
-	var address = socket.handshake.address;
-	
+	// validate ip address
+	var address = socket.handshake.address;	
 	if (ips.indexOf(address) != -1) {
+		socket.emit('bad', 'already connected with the same ip')
 		socket.disconnect()
 	}
 	else{
 		ips.push(address)
 	}
-}
+
+	socket.on('new user', function(nickName, callback) {
+		// validate nickName
+		if ( users.indexOf(nickName) == -1 ) {
+			socket.nickName =  nickName
+			console.log( "new users: " + socket.nickName )
+			users.push( socket.nickName )
+
+			// update online users
+			io.emit('update online users', users )
+
+			callback ({ isValid: true })
+		}
+		else{
+			callback({ isValid: false, error:'nickName is taken' })
+		}
+	})
 
 
-// makes sure every user has a unique nickName 
-function checkUser(socket, nickName, callback) {
-	if ( users.indexOf(nickName) == -1 ) {
+	socket.on('new msg', function(data) {
+		if (data.nickName && data.msg) {
+			io.emit('update msgs', data)
+		}
+	})
 
-		// add name to the socket object
-		socket.nickName = nickName
+	socket.on('disconnect', function() {
+ 		var nickNameIndex = users.indexOf( socket.nickName )	
+		 users.splice(nickNameIndex, 1)	
 
-		// add name to the array
-		users.push(socket.nickName)
-	
-		// send users names to every one
-		io.emit('update online user', users);
+ 		var ipIndex = ips.indexOf( socket.handshake.address )
+		 ips.splice(ipIndex, 1)	
 
-		callback(true)
-	}else{
-		callback(false)
-	}
+		io.emit('update online users', users )
+		console.log('disconnected: ' + socket.nickName)
+	})
 
-}
+})
