@@ -1,64 +1,62 @@
-
 (function() {
-
+	"use strict";
 
 	var socket;
+	var nickName;
+	
+	// initiate socket connection
+	if (!socket) {
+		  socket = io('http://localhost:3000');
+	}
 
+
+	// set nickName
 	$('#setNick').on('click', function() {
-		var nickName = $('#name').val()
-		if (!socket) {
-			var socket = io.connect('http://localhost:3000');
-		}
-
-		socket.emit('new user', nickName , function(isValid) {
-			if (isValid) {
-	   			$('#onlineusers').append($('<li>').text(nickName));
+		nickName = $('#name').val()
+		
+		socket.emit('new user', nickName , function(data){
+			if (data.isValid) {
+				// hide #initialConnection
+				// show #chat
 				$('#chat').show()
-				$('#initialConnection').hide()
-				socketUpdates(socket, nickName) 
+			}
+			else{
+				console.log(data.error)
 			}
 		})
-	
+	})// end of click
+
+
+	$('#send').on('click', function() {
+		var msg = $('#msg').val()
+
+		if (msg) {
+			socket.emit('new msg', {nickName: nickName, msg: msg})
+		}
+
+		$('#msg').val('')
 	})
 
 
 
-	// handels all socket events, emets and updates
-	function socketUpdates(socket, nickName) {
-	
-		// handle online users updates
-		socket.on('update online user' , function(users) {
-			// empty online users list
-			// $('#onlineusers > li').remove()
+	socket.on('update online users', function(users) {
+		$('#onlineusers > li').remove()
 
-   			console.log(users)
-			// add online users 
-			// for (var i = users.length - 1; i >= 0; i--) {
-		   			// $('#onlineusers').append($('<li>').text(users[i]));
-			// }
-		})
-
-
-		// update msgs list
-		socket.on('update msgs', function (data) {
-			$('#allmsgs').append($('<li>').text( data.name + ':  ' + data.msg ));
-
-		});
-
-
-		// send new msg
-		$('#send').on('click', function() {
-			var $msg = $('#msg')
-			if ($msg.val()) {
-				socket.emit('new msg', { name: nickName, msg: $msg.val()} )		
-				$msg.val('')
-			}
-		})
-
-
-	}
+		for (var i = users.length - 1; i >= 0; i--) {
+   			$('#onlineusers').append( $('<li>').text(users[i]) );		
+		}
+	})
 
 
 
-})();
+	socket.on('update msgs', function(data) {
+		$('#allmsgs').append( $('<li>').text(data.nickName + ' : ' + data.msg) );		
+	})
 
+
+	socket.on('bad', function(error) {
+		console.log(error)
+	})
+
+
+})()
