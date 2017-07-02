@@ -1,3 +1,7 @@
+*
+	-webkit-box-sizing: border-box
+	--moz-box-sizing: border-box
+	box-sizing: border-box
 
 body
 	background-color: pink
@@ -13,10 +17,12 @@ a
 			display: inline-block
 
 #initialConnection 
-	display: none
+	// for debugging
+	// display: none  
 
 #chat
-	// display: none
+	// show in production
+	display: none   
 
 
 .onlineusers
@@ -38,19 +44,28 @@ a
 .msg
 	width: 82%
 	vertical-align: top
+	outline: none
+    white-space: pre-wrap
+    word-wrap: break-word
+    
 
 
 #send
-    height: 50px
+    height: 47px
 
 .allmsgs
-	overflow: scroll
+	overflow-x: hidden
+	overflow-y: scroll
 	padding: 15px 15px 5px 5px
+	margin: 0
 	list-style: none
 	height: 100%
 	background-color: #333
 	li
 		padding: 5px 0 5px
+		pre
+			white-space: pre-wrap
+			word-wrap: break-word
 
 
 
