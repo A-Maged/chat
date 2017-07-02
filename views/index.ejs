@@ -3,28 +3,43 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="/css/styles.bundle.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- bootstrap -->	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- custom css -->	<link rel="stylesheet" type="text/css" href="/css/styles.bundle.css">
 </head>
 <body>
 
-	<%- include partials/nav.ejs %>
+<%- include partials/nav.ejs %>
+
+
+<form id="initialConnection">
+	<p>input you nickname</p>
+	<input type="text" id="name" placeholder="name">
+	<button id="setNick">register</button>
+</form>
+
+
+<div id="chat">
 	
+	<div class="row">
+		
+		<div class="col-xs-5 col-sm-2 onlineusers">
+			<ul></ul>	
+		</div>
 
-	<div id="initialConnection">
-		<p>input you nickname</p>
-		<input type="text" id="name" placeholder="name">
-		<button id="setNick">register</button>
-	</div>
+		
+		<div class="col-xs-8 col-sm-4 chat-box">
+			<ul class="allmsgs"></ul>	
 
-	<div id="chat">
-		<ul id="onlineusers"></ul>
-		<br>
-		<textarea id="msg" "></textarea>
-		<br>
-		<button id="send">send</button>
-		<br>
-		<ul id="allmsgs"></ul>	
-	</div>
+			<form>
+				<textarea class="msg" "></textarea>
+
+				<button id="send">send</button>
+			</form>	
+		</div>
+
+	</div>	<!-- end .row -->
+</div> <!-- end chat -->
 	
 
 
@@ -33,7 +48,7 @@
 
 	
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	 <script src="/socket.io/socket.io.js"></script>
-	 <script type="text/javascript" src="/js/bundle.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="/js/bundle.js"></script>
 </body>
 </html>

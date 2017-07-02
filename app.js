@@ -55,8 +55,8 @@ io.on('connection', function (socket) {
 	// validate ip address
 	var address = socket.handshake.address;	
 	if (ips.indexOf(address) != -1) {
-		socket.emit('bad', 'already connected with the same ip')
-		socket.disconnect()
+		// socket.emit('bad', 'already connected with the same ip')
+		// socket.disconnect()
 	}
 	else{
 		ips.push(address)

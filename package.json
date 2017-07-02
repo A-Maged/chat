@@ -8,7 +8,6 @@
     "serverWatch": "supervisor  -i views,public  app.js",
     "webpackWatch": "webpack --watch",
     "dev": "concurrently --kill-others \"npm run webpackWatch\" \"npm run serverWatch\""
-
   },
   "keywords": [],
   "author": "",
@@ -35,6 +34,6 @@
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.5",
     "webpack": "^2.5.0",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^2.5.0"
   }
 }

@@ -1,5 +1,51 @@
 body {
   background-color: pink; }
 
-#chat {
+a {
+  text-decoration: none; }
+
+.nav {
+  background-color: #111; }
+  .nav ul {
+    list-style: none; }
+    .nav ul li {
+      padding: 10px;
+      display: inline-block; }
+
+#initialConnection {
   display: none; }
+
+.onlineusers {
+  margin: 0;
+  background: black;
+  color: white;
+  list-style: none;
+  padding: 15px;
+  height: 100%;
+  position: fixed;
+  top: 47px; }
+
+.chat-box {
+  margin-left: 41%;
+  height: 70vh;
+  position: fixed;
+  bottom: 60px; }
+
+.msg {
+  width: 82%;
+  vertical-align: top; }
+
+#send {
+  height: 50px; }
+
+.allmsgs {
+  overflow: scroll;
+  padding: 15px 15px 5px 5px;
+  list-style: none;
+  height: 100%;
+  background-color: #333; }
+  .allmsgs li {
+    padding: 5px 0 5px; }
+
+.col-xs-3 {
+  padding: 0; }

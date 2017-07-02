@@ -101,42 +101,51 @@ __webpack_require__(0);
 		socket = io('/');
 	}
 
-	// set nickName
-	$('#setNick').on('click', function () {
+	function setNickName(e) {
+		e.preventDefault();
 		nickName = $('#name').val();
 
 		socket.emit('new user', nickName, function (data) {
 			if (data.isValid) {
 				// hide #initialConnection
+				$('#initialConnection').remove();
+
 				// show #chat
 				$('#chat').show();
 			} else {
 				console.log(data.error);
 			}
 		});
-	}); // end of click
+	}
 
+	function sendMsg(e) {
+		e.preventDefault();
 
-	$('#send').on('click', function () {
-		var msg = $('#msg').val();
+		var msg = $('.msg').val();
 
 		if (msg) {
 			socket.emit('new msg', { nickName: nickName, msg: msg });
 		}
 
-		$('#msg').val('');
-	});
+		$('.msg').val('');
+	}
+
+	// set nickName
+	$('#setNick').on('click', setNickName);
+
+	// send Msg
+	$('#send').on('click', sendMsg);
 
 	socket.on('update online users', function (users) {
-		$('#onlineusers > li').remove();
+		$('.onlineusers > ul > li').remove();
 
 		for (var i = users.length - 1; i >= 0; i--) {
-			$('#onlineusers').append($('<li>').text(users[i]));
+			$('.onlineusers > ul').append($('<li>').text(users[i]));
 		}
 	});
 
 	socket.on('update msgs', function (data) {
-		$('#allmsgs').append($('<li>').text(data.nickName + ' : ' + data.msg));
+		$('.allmsgs').append($('<li>').append($('<pre>').text(data.nickName + ' : ' + data.msg)));
 	});
 
 	socket.on('bad', function (error) {
