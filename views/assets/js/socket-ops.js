@@ -3,7 +3,9 @@
 
 	var socket;
 	var nickName;
-	
+	var $msg = $('.msg')
+	var $allmsgs = $('.allmsgs')
+
 	// initiate socket connection
 	if (!socket) {
 		  socket = io('/');
@@ -34,13 +36,23 @@
 	function sendMsg(e) {
 		e.preventDefault();
 		
-		var msg = $('.msg').val()
+		var msg = $msg.val()
 
 		if (msg) {
 			socket.emit('new msg', {nickName: nickName, msg: msg})
+			console.log(msg)
 		}
 
-		$('.msg').val('')
+		$msg.val('')
+
+		
+		if ( $allmsgs.children().length > 1 ) {
+			$allmsgs.animate({
+	    	    scrollTop: $allmsgs.children().last().offset().top
+		    }, 300);
+		}
+	
+
 	}
 
 
@@ -49,6 +61,12 @@
 
 	// send Msg
 	$('#send').on('click', sendMsg )
+
+	$msg.on('keyup', function(e) {
+	    if (e.keyCode == 13 && !e.shiftKey){
+			sendMsg(e)
+		}
+	})
 
 
 
@@ -63,7 +81,7 @@
 
 
 	socket.on('update msgs', function(data) {
-		$('.allmsgs').append( $('<li>').append( $('<pre>').text(data.nickName + ' : ' + data.msg) ) );		
+		$allmsgs.append( $('<li>').append( $('<pre>').text(data.nickName + ' : ' + data.msg) ) );		
 	})
 
 

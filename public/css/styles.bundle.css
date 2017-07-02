@@ -37,18 +37,19 @@ a {
   bottom: 60px; }
 
 .msg {
-  width: 82%;
+  width: 88%;
+  height: 47px;
   vertical-align: top;
   outline: none;
-    outline-white-space: pre-wrap;
-    outline-word-wrap: break-word; }
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  resize: none; }
 
 #send {
   height: 47px; }
 
 .allmsgs {
   overflow-x: hidden;
-  overflow-y: scroll;
   padding: 15px 15px 5px 5px;
   margin: 0;
   list-style: none;
