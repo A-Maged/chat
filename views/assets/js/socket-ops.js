@@ -40,17 +40,20 @@
 
 		if (msg) {
 			socket.emit('new msg', {nickName: nickName, msg: msg})
-			console.log(msg)
 		}
 
 		$msg.val('')
 
 		
-		if ( $allmsgs.children().length > 1 ) {
-			$allmsgs.animate({
-	    	    scrollTop: $allmsgs.children().last().offset().top
-		    }, 300);
-		}
+		// if ( $allmsgs.children().length > 1 ) {
+			// var scrollValue = $('.allmsgs li:last pre').offset().top - 30
+
+			$('.allmsgs').scrollTop($('.allmsgs')[0].scrollHeight );
+
+			// $allmsgs.animate({
+	  //   	    scrollTop: scrollValue
+		 //    }, 300);
+		// }
 	
 
 	}
