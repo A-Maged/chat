@@ -20,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use( express.static(  path.join(__dirname, 'public') ));
 
 
-// 2- use middlewares
+// 2- use generic middlewares
 
 
 // 3- define routes
