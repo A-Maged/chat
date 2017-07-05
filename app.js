@@ -52,6 +52,7 @@ var users = []
 var ips = []
 
 io.on('connection', function (socket) {
+	
 	// validate ip address
 	var address = socket.handshake.address;	
 	if (ips.indexOf(address) != -1) {
@@ -61,6 +62,8 @@ io.on('connection', function (socket) {
 	else{
 		ips.push(address)
 	}
+
+
 
 	socket.on('new user', function(nickName, callback) {
 		// validate nickName
@@ -80,11 +83,14 @@ io.on('connection', function (socket) {
 	})
 
 
+	
+
 	socket.on('new msg', function(data) {
 		if (data.nickName && data.msg) {
 			io.emit('update msgs', data)
 		}
 	})
+
 
 	socket.on('disconnect', function() {
  		var nickNameIndex = users.indexOf( socket.nickName )	
