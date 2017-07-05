@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -79,6 +79,8 @@
 "use strict";
 
 
+__webpack_require__(3);
+
 __webpack_require__(2);
 
 __webpack_require__(0);
@@ -90,12 +92,18 @@ __webpack_require__(0);
 "use strict";
 
 
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 (function () {
-	"use strict";
 
 	var socket;
 	var nickName;
-	var $msg = $('.msg');
+	var $msgBox = $('.msg-box');
 	var $allmsgs = $('.allmsgs');
 
 	// initiate socket connection
@@ -123,43 +131,46 @@ __webpack_require__(0);
 	function sendMsg(e) {
 		e.preventDefault();
 
-		var msg = $msg.val();
+		var msg = $msgBox.val();
 
 		if (msg) {
 			socket.emit('new msg', { nickName: nickName, msg: msg });
 		}
 
-		$msg.val('');
+		$msgBox.val('');
+	}
 
-		// if ( $allmsgs.children().length > 1 ) {
-		// var scrollValue = $('.allmsgs li:last pre').offset().top - 30
+	function handleEnter(e) {
+		if (e.keyCode == 13 && !e.shiftKey) {
+			e.preventDefault();
 
-		$('.allmsgs').scrollTop($('.allmsgs')[0].scrollHeight);
+			console.log('sent');
 
-		// $allmsgs.animate({
-		//   	    scrollTop: scrollValue
-		//    }, 300);
-		// }
-
+			sendMsg(e);
+		}
 	}
 
 	// set nickName
 	$('#setNick').on('click', setNickName);
 
 	// send Msg
-	$('#send').on('click', sendMsg);
+	// $('#send').on('click', sendMsg )
 
-	$msg.on('keyup', function (e) {
-		if (e.keyCode == 13 && !e.shiftKey) {
-			sendMsg(e);
-		}
-	});
+
+	$msgBox.on('keydown', handleEnter);
+
+	// $msgBox.on('keyup', function(e) {
+	//     if (e.keyCode == 13 && !e.shiftKey){
+	// 		sendMsg(e)
+	// 	}
+	// })
+
 
 	socket.on('update online users', function (users) {
-		$('.onlineusers > ul > li').remove();
+		$('.online-users > ul > li').remove();
 
 		for (var i = users.length - 1; i >= 0; i--) {
-			$('.onlineusers > ul').append($('<li>').text(users[i]));
+			$('.online-users > ul').append($('<li>').text(users[i]));
 		}
 	});
 
@@ -173,7 +184,7 @@ __webpack_require__(0);
 })();
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);

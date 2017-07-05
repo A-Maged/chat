@@ -1,15 +1,19 @@
 (function() {
-	"use strict";
 
 	var socket;
 	var nickName;
-	var $msg = $('.msg')
+	var $msgBox = $('.msg-box')
 	var $allmsgs = $('.allmsgs')
+
+
 
 	// initiate socket connection
 	if (!socket) {
 		  socket = io('/');
 	}
+
+
+
 
 
 	function setNickName(e) {
@@ -36,48 +40,53 @@
 	function sendMsg(e) {
 		e.preventDefault();
 		
-		var msg = $msg.val()
+		var msg = $msgBox.val()
 
 		if (msg) {
 			socket.emit('new msg', {nickName: nickName, msg: msg})
 		}
 
-		$msg.val('')
+		$msgBox.val('')
 
-		
-		// if ( $allmsgs.children().length > 1 ) {
-			// var scrollValue = $('.allmsgs li:last pre').offset().top - 30
-
-			$('.allmsgs').scrollTop($('.allmsgs')[0].scrollHeight );
-
-			// $allmsgs.animate({
-	  //   	    scrollTop: scrollValue
-		 //    }, 300);
-		// }
-	
 
 	}
+
+
+	function handleEnter(e){
+		if (e.keyCode == 13 && !e.shiftKey){
+			e.preventDefault()
+
+			console.log('sent')
+
+			sendMsg(e)
+		}
+	}
+
 
 
 	// set nickName
 	$('#setNick').on('click', setNickName )
 
 	// send Msg
-	$('#send').on('click', sendMsg )
+	// $('#send').on('click', sendMsg )
 
-	$msg.on('keyup', function(e) {
-	    if (e.keyCode == 13 && !e.shiftKey){
-			sendMsg(e)
-		}
-	})
 
+	$msgBox.on('keydown', handleEnter)
+
+
+
+	// $msgBox.on('keyup', function(e) {
+	//     if (e.keyCode == 13 && !e.shiftKey){
+	// 		sendMsg(e)
+	// 	}
+	// })
 
 
 	socket.on('update online users', function(users) {
-		$('.onlineusers > ul > li').remove()
+		$('.online-users > ul > li').remove()
 
 		for (var i = users.length - 1; i >= 0; i--) {
-   			$('.onlineusers > ul').append( $('<li>').text(users[i]) );		
+   			$('.online-users > ul').append( $('<li>').text(users[i]) );		
 		}
 	})
 
@@ -93,4 +102,5 @@
 	})
 
 
-})()
+
+}())
