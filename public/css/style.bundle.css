@@ -5,11 +5,11 @@
 
 html, body {
   margin: 0;
-  color: #eee;
   height: 100vh;
   font-family: 'Roboto', sans-serif;
   letter-spacing: 1.4px;
-  position: relative; }
+  position: relative;
+  width: 100%; }
 
 input::-webkit-input-placeholder {
   color: #ccc; }
@@ -35,24 +35,20 @@ input::-ms-input-placeholder {
   visibility: hidden; }
 
 .scrollbar-style-1::-webkit-scrollbar {
-  /*width: 6px*/
   width: 10px;
-  background-color: #c0c0c0;
-  /*visibility: hidden*/ }
+  background-color: #c0c0c0; }
 
 .scrollbar-style-1::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #6f759d;
-  /*background-color: #19217a*/ }
+  background-color: #6f759d; }
 
-/* CUSTOM*/
-/*==================*/
 .container {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%; }
+  height: 100%;
+  width: 100%; }
 
 .clearfix:after {
   content: "";
@@ -62,19 +58,13 @@ input::-ms-input-placeholder {
 #chat {
   display: none; }
 
-/* ASIDE */
-/*==================*/
 aside {
-  /*background-color: #283593*/
-  /*background-color: #3d478e*/
   background-color: #4c506d;
   padding-top: 22px;
   padding-bottom: 10px;
-  /*width: 320px*/
   width: 24%;
   height: 100%;
   float: left;
-  /*overflow: hidden*/
   overflow-x: hidden; }
 
 .search {
@@ -95,6 +85,9 @@ aside {
 .fa-search {
   color: #ccc;
   margin-right: 17px; }
+
+.online-users {
+  color: #eee; }
 
 .user {
   padding: 18px 15px 18px 10px;
@@ -169,7 +162,7 @@ aside {
 .chat-head {
   height: 12%;
   border-bottom: 1px solid #E5E5E5;
-    border-bottom-padding-top: 20px; }
+  padding-top: 20px; }
 
 .chat-head .title {
   margin: 0;

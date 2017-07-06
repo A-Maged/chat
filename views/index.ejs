@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- font Awsome --> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<%- include partials/header.ejs %>
 
-	<!-- google fonts --> <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-
-	<!-- normalize -->	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">	
-
-	<!-- custom css -->	<link rel="stylesheet" type="text/css" href="/css/style.bundle.css">
-
-</head>
-<body>
 
 
 <form id="initialConnection">
@@ -43,7 +29,7 @@
 		<div class="online-users">
 		
 			<div class="user active-user active-conversation">
-				<img class="img" src="imgs/3.jpg">				
+				<!-- <img class="img" src="imgs/3.jpg">				 -->
 				
 				<div class="content">
 
@@ -52,7 +38,7 @@
 						<span class="date">2:49 pm</span>						
 					</div>
 
-					<p class="msg-excerpt">sit amet, consectetur adipisicing</p>								
+					<!-- <p class="msg-excerpt">sit amet, consectetur adipisicing</p>								 -->
 				</div>
 			</div>	
 
@@ -97,8 +83,4 @@
 </div>  <!-- end .container -->
 
 	
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script type="text/javascript" src="/js/bundle.js"></script>
-</body>
-</html>
+<%- include partials/footer.ejs %>

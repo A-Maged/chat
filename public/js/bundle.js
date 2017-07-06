@@ -167,10 +167,13 @@ __webpack_require__(0);
 
 
 	socket.on('update online users', function (users) {
-		$('.online-users > ul > li').remove();
+
+		// $('.online-users > ul > li').remove()
+		$('.online-users').children().remove();
 
 		for (var i = users.length - 1; i >= 0; i--) {
-			$('.online-users > ul').append($('<li>').text(users[i]));
+			// $('.online-users > ul').append( $('<li>').text(users[i]) );		
+			$('.online-users').append($('<div class="user active-user active-conversation">').append($('<div class="content">').append($('<div class="name-date-block">').append($('<p class="name">').text(users[i]), $('<span class="date">').text(new Date().toLocaleTimeString('en-US', { hour: "numeric", minute: "numeric" }))))));
 		}
 	});
 
