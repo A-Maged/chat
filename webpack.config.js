@@ -23,10 +23,10 @@ module.exports = {
                     presets: ['react', 'es2015']
                 }
             },
-           {
+           	{
                 test: /\.(sass|scss)$/,
                 loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader'])
-          }
+          	}
 
         ]
     },
