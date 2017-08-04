@@ -27,6 +27,8 @@
 
 				// show #chat
 				$('#chat').show()
+
+				$('.chat-head .title').text(nickName)
 			}
 			else{
 				console.log(data.error)
@@ -67,21 +69,11 @@
 	// set nickName
 	$('#setNick').on('click', setNickName )
 
-	// send Msg
-	// $('#send').on('click', sendMsg )
-
-
 	$msgBox.on('keydown', handleEnter)
 
 
 
-	// $msgBox.on('keyup', function(e) {
-	//     if (e.keyCode == 13 && !e.shiftKey){
-	// 		sendMsg(e)
-	// 	}
-	// })
-
-
+	
 	socket.on('update online users', function(users) {
 
 		// $('.online-users > ul > li').remove()
@@ -91,21 +83,14 @@
 		for (var i = users.length - 1; i >= 0; i--) {
    			// $('.online-users > ul').append( $('<li>').text(users[i]) );		
 			$('.online-users').append(  
-
-
 				$('<div class="user active-user active-conversation">').append(  
-
 					$('<div class="content">').append(  
-
 							$('<div class="name-date-block">').append(  
 								$('<p class="name">').text(users[i]),
 								$('<span class="date">').text( new Date().toLocaleTimeString('en-US', { hour: "numeric", minute: "numeric"}) ))						
 							)
-
 					)
 				)
-			
-
 		}
 
 
@@ -117,7 +102,7 @@
 
 
 	socket.on('update msgs', function(data) {
-		$allmsgs.append( $('<li>').append( $('<pre>').text(data.nickName + ' : ' + data.msg) ) );		
+		$allmsgs.append( $('<li class="msg">').append( $('<pre class="msg-data">').text(data.nickName + ' : ' + data.msg) ) );		
 	})
 
 

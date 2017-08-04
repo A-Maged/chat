@@ -85,6 +85,24 @@ __webpack_require__(2);
 
 __webpack_require__(0);
 
+function handleEnter(e) {
+	if (e.keyCode == 13 && !e.shiftKey) {
+		e.preventDefault();
+		console.log('sent');
+	}
+}
+
+$('.menu-icon').on('click', function () {
+
+	// if on mobile
+	if (Modernizr.mq('(max-width: 776px)')) {
+		$('aside').toggleClass('sm-toggle-menu');
+	} else {
+		$('aside').toggleClass('md-toggle-menu');
+		$('.chat-box').toggleClass('full-width');
+	}
+});
+
 /***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -122,6 +140,8 @@ __webpack_require__(0);
 
 				// show #chat
 				$('#chat').show();
+
+				$('.chat-head .title').text(nickName);
 			} else {
 				console.log(data.error);
 			}
@@ -153,18 +173,7 @@ __webpack_require__(0);
 	// set nickName
 	$('#setNick').on('click', setNickName);
 
-	// send Msg
-	// $('#send').on('click', sendMsg )
-
-
 	$msgBox.on('keydown', handleEnter);
-
-	// $msgBox.on('keyup', function(e) {
-	//     if (e.keyCode == 13 && !e.shiftKey){
-	// 		sendMsg(e)
-	// 	}
-	// })
-
 
 	socket.on('update online users', function (users) {
 
@@ -178,7 +187,7 @@ __webpack_require__(0);
 	});
 
 	socket.on('update msgs', function (data) {
-		$allmsgs.append($('<li>').append($('<pre>').text(data.nickName + ' : ' + data.msg)));
+		$allmsgs.append($('<li class="msg">').append($('<pre class="msg-data">').text(data.nickName + ' : ' + data.msg)));
 	});
 
 	socket.on('bad', function (error) {
